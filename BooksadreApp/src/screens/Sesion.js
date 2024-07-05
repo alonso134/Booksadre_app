@@ -20,7 +20,7 @@ export default function Sesion({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../img/San_luis.png')}
+        source={require('../img/booksadre.png')}
         style={styles.image}
       />
       <Text style={styles.texto}>Iniciar Sesión</Text>
