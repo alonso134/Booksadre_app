@@ -1,17 +1,19 @@
 
 import { StyleSheet, Text, View,TextInput, TouchableOpacity, Alert } from 'react-native';
 
-export default function Input({placeHolder, setValor, contra, setTextChange}) {
+export default function InputMultiline({placeHolder, setValor, contra, valor}) {
 
   return (
 
     <TextInput
     style={styles.Input}
     placeholder={placeHolder}
-    value={setValor}
+    value={valor}
+    onChangeText={setValor}
     placeholderTextColor={'#000000'}
     secureTextEntry={contra} 
-    onChangeText={setTextChange}
+    multiline={true}
+    numberOfLines={4}
     />
 
   );

@@ -1,7 +1,7 @@
 
-import { StyleSheet, Text, View,TextInput, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, TextInput} from 'react-native';
 
-export default function Input({placeHolder, setValor, contra, setTextChange}) {
+export default function InputEmail({placeHolder, setValor, setTextChange}) {
 
   return (
 
@@ -10,8 +10,8 @@ export default function Input({placeHolder, setValor, contra, setTextChange}) {
     placeholder={placeHolder}
     value={setValor}
     placeholderTextColor={'#000000'}
-    secureTextEntry={contra} 
     onChangeText={setTextChange}
+    keyboardType="email-address"
     />
 
   );

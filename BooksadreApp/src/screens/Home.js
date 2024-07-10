@@ -1,196 +1,119 @@
-import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { Appbar } from 'react-native-paper';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Alert, Image } from 'react-native';
+import Buttons from '../components/Buttons/Button';
+import * as Constantes from '../utils/constantes';
 
-const Home = ({ navigation }) => {
-  const [menuVisible, setMenuVisible] = useState(false);
+export default function Home({ navigation }) {
+  const [nombre, setNombre] = useState(null);
+  const ip = Constantes.IP;
 
-  const items = [
-    { text: 'Codigos', image: require('../img/codigo.jpg') },
-    { text: 'Observaciones', image: require('../img/observaciones.jpg') },
-    { text: 'Ausencias', image: require('../img/ausencias.jpg') },
-    { text: 'Llegadas Tarde clase', image: require('../img/tardes.jpg') },
-  ];
-
-  const handlePress = (item) => {
-    switch (item.text) {
-      case 'Ausencias':
-        navigation.navigate('Ausencias');
-        break;
-      case 'Observaciones':
-        navigation.navigate('Observaciones'); // Asegúrate de que coincida con el nombre en Stack.Navigator
-        break;
-      case 'Llegadas Tarde clase':
-        navigation.navigate('Tarde');
-        break;
-      case 'Codigos':
-        navigation.navigate('Codigos');
-        break;
-      default:
-        console.log(`${item.text} presionado`);
-        break;
+  const handleLogout = async () => {
+    try {
+      const response = await fetch(`${ip}/Tienda/T.Booksadre/api/services/public/cliente.php?action=logOut`, {
+        method: 'GET'
+      });
+      const data = await response.json();
+      if (data.status) {
+        navigation.navigate('Sesion');
+      } else {
+        Alert.alert('Error', data.error);
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Ocurrió un error al cerrar la sesión');
     }
   };
-  
 
-  const toggleMenu = () => setMenuVisible(!menuVisible);
+  const irActualizar = () => {
+    navigation.navigate('Productos');
+  };
+
+  const EditUser = () => {
+    navigation.navigate('UpdateUser');
+  };
+
+  const getUser = async () => {
+    try {
+      const response = await fetch(`${ip}/Tienda/T.Booksadre/api/services/public/cliente.php?action=getUser`, {
+        method: 'GET'
+      });
+      const data = await response.json();
+      if (data.status) {
+        setNombre(data.name.nombre_cliente);
+      } else {
+        Alert.alert('Error', data.error);
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Ocurrió un error al cerrar la sesión');
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <View style={styles.container}>
-      <Appbar.Header style={styles.appBar}>
-        <Appbar.Content title="CECSL" titleStyle={styles.appBarTitle} />
-        <TouchableOpacity onPress={toggleMenu} style={styles.menuButton}>
-          <Image source={require('../../assets/menu-icon.png')} style={styles.menuIcon} />
-        </TouchableOpacity>
-      </Appbar.Header>
-      <View style={styles.content}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Inicio</Text>
-        </View>
-        <View style={styles.table}>
-          {items.map((item, index) => (
-            <TouchableOpacity key={index} style={styles.cell} onPress={() => handlePress(item)}>
-              <Image source={item.image} style={styles.image} />
-              <Text style={styles.text}>{item.text}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-      </View>
+      <Image
+        source={require('../../assets/booksadre.png')}
+        style={styles.image}
+      />
+      <Text style={styles.title}>Bienvenid@</Text>
+      <Text style={styles.subtitle}>
+        { /*correo ? correo : 'No hay correo para mostrar'*/}
+        {nombre ? nombre : 'No hay Nombre para mostrar'}
+      </Text>
+      <Buttons
+        textoBoton='Cerrar Sesión'
+        accionBoton={handleLogout}
+      />
 
-      {menuVisible && (
-        <View style={styles.overlay}>
-          <View style={styles.menu}>
-            <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Home')}>
-              <Text>Inicio</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('MateriasScreen')}>
-              <Text>Materias</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Perfil')}>
-              <Text>Perfil</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Observaciones')}>
-              <Text>Observaciones</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Ausencias')}>
-              <Text>Ausencias</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Tarde')}>
-              <Text>Llegadas Tarde</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Codigos')}>
-              <Text>Codigos</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.closeButton} onPress={toggleMenu}>
-              <Text style={styles.closeButtonText}>Cerrar</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      )}
-
+      <Buttons
+        textoBoton='Ver Productos'
+        accionBoton={irActualizar}
+      />
+      <Buttons
+        textoBoton='Editar Usuario'
+        accionBoton={EditUser}
+      />
     </View>
   );
-};
-
-
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F0FFFF',
-  },
-  appBar: {
-    backgroundColor: '#120851',
-    justifyContent: 'space-between',
+    backgroundColor: '#778DA9',
     alignItems: 'center',
-    elevation: 0,
+    justifyContent: 'center'
   },
-  appBarTitle: {
-    color: '#FFFFFF',
-    fontSize: 20,
-    fontWeight: 'bold',
+  image: {
+    width: 200,
+    height: 200,
+    marginBottom: 10
   },
-  menuButton: {
-    padding: 10,
-    marginRight: 10,
+  button: {
+    borderWidth: 2,
+    borderColor: "black",
+    width: 100,
+    borderRadius: 10,
+    backgroundColor: "darkblue"
   },
-  menuIcon: {
-    width: 35,
-    height: 35,
-  },
-  content: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  titleContainer: {
-    alignItems: 'center',
-    marginBottom: 20,
+  buttonText: {
+    textAlign: 'center',
+    color: "white"
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-  },
-  table: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    width: '100%',
-    backgroundColor: '#FFFFFF',
-    padding: 20,
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  cell: {
-    alignItems: 'center',
-    margin: 15,
-    width: '40%',
-  },
-  image: {
-    width: 80,
-    height: 90,
-    borderRadius: 40,
-    backgroundColor: '#D3D3D3',
-  },
-  text: {
-    marginTop: 10,
-    fontSize: 18,
     textAlign: 'center',
+    marginVertical: 5,
+    color: '#ffffff', // Brown color for the title
   },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  menu: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 10,
-    padding: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  menuItem: {
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#CCCCCC',
-  },
-  closeButton: {
-    marginTop: 10,
-    alignItems: 'center',
-  },
-  closeButtonText: {
-    color: 'red',
-    fontSize: 16,
+  subtitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    textAlign: 'center',
+    marginVertical: 5,
+    color: '#ffffff', // Brown color for the title
   },
 });
-
-export default Home;

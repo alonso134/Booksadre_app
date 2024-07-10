@@ -1,5 +1,5 @@
 {
-  "name": "sgesanluis",
+  "name": "cliente-app-coffeeshop",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -11,10 +11,9 @@
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
     "@react-native-community/datetimepicker": "^7.7.0",
-    "@react-native-picker/picker": "^2.7.7",
-    "@react-navigation/bottom-tabs": "^6.5.20",
+    "@react-navigation/bottom-tabs": "^6.6.0",
     "@react-navigation/native": "^6.1.17",
-    "@react-navigation/native-stack": "^6.9.26",
+    "@react-navigation/native-stack": "^6.10.0",
     "expo": "~50.0.14",
     "expo-status-bar": "~1.11.1",
     "expo-web-browser": "^12.8.2",
@@ -24,7 +23,6 @@
     "react-native": "0.73.6",
     "react-native-datepicker": "^1.7.2",
     "react-native-masked-text": "^1.13.0",
-    "react-native-paper": "^5.12.3",
     "react-native-picker-select": "^9.1.3",
     "react-native-vector-icons": "^10.1.0"
   },

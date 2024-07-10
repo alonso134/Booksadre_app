@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "SgeSanluis",
-    "slug": "SgeSanluis",
+    "name": "cliente-app-booksadre",
+    "slug": "cliente-app-booksadre",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/booksadre.png",
@@ -19,12 +19,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/San_luis.png",
+        "foregroundImage": "./assets/booksadre.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/San_luis.png"
+      "favicon": "./assets/booksadre.png"
     }
   }
 }
