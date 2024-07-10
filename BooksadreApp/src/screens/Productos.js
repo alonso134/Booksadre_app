@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 16,
-    color: '#5C3D2E',
+    color: '#FFFFFF',
   },
   cartButton: {
     flexDirection: 'row',
