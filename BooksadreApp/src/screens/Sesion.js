@@ -93,7 +93,7 @@ export default function Sesion({ navigation }) {
       />
       <Text style={styles.texto}>Iniciar Sesión</Text>
       <Input
-        placeHolder='correo'
+        placeHolder='Usuario'
         setValor={usuario}
         setTextChange={setUsuario}
       />
