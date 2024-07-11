@@ -83,6 +83,14 @@ const Carrito = ({ navigation }) => {
     setCantidadProductoCarrito(cantidadDetalle);
   };
 
+    // Función para manejar la modificación de un detalle del carrito
+    const handleDeleteDetalleCarrito = (idDetalle) => {
+      setModalVisible(true);
+      setIdDetalle(idDetalle);
+  
+    };
+
+  
   // Función para renderizar cada elemento del carrito
   const renderItem = ({ item }) => (
     <CarritoCard

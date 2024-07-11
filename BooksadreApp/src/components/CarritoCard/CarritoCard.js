@@ -91,7 +91,7 @@ const CarritoCard = ({item, cargarCategorias,
     </TouchableOpacity>
 
     <TouchableOpacity style={styles.deleteButton}
-    onLongPress={()=>handleDeleteDetalleCarrito(item.id_detalle)}
+    onPress={()=>handleDeleteDetalleCarrito(item.id_detalle)}
     >
       <Text style={styles.buttonText}>Eliminar del carrito</Text>
     </TouchableOpacity>
