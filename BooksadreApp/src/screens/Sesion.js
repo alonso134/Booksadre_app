@@ -68,7 +68,7 @@ export default function Sesion({ navigation }) {
       if (data.status) {
         setContrasenia('')
         setUsuario('')
-        navigation.navigate('TabNavigator');
+        navigation.navigate('carga');
       } else {
         console.log(data);
         Alert.alert('Error sesión', data.error);

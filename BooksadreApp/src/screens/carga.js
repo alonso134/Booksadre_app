@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
 import { useEffect, useState } from 'react';
-import * as Constantes from '../utils/constantes'
+
 
 export default function Carga({ navigation }) {
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.navigate('Home');
+      navigation.navigate('TabNavigator');
     }, 3000); // Navega a 'Home' después de 3 segundos
 
     return () => clearTimeout(timer); // Limpia el temporizador si el componente se desmonta
@@ -28,11 +28,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#026666',
+    backgroundColor: '#778DA9',
   },
   logo: {
     width: 150,
-    height: 250,
+    height: 100,
     marginBottom: 20,
   },
   text: {
