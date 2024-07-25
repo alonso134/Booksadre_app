@@ -16,7 +16,7 @@ export default function ProductoCard({ ip, imagenProducto, idProducto, nombrePro
     <View style={styles.card}>
       <View style={styles.imageContainer}>
         <Image
-          source={{ uri: `${ip}/Tienda/T.Booksadre/api/images/productos/${imagenProducto}` }}
+          source={{ uri: `${ip}/T.Booksadre/api/images/productos/${imagenProducto}` }}
           style={styles.image}
           resizeMode="contain" // Ajustar la imagen al contenedor
         />

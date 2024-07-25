@@ -40,7 +40,7 @@ const Carrito = ({ navigation }) => {
   // Función para obtener los detalles del carrito desde el servidor
   const getDetalleCarrito = async () => {
     try {
-      const response = await fetch(`${ip}/Tienda/T.Booksadre/api/services/public/pedido.php?action=readDetail`, {
+      const response = await fetch(`${ip}/T.Booksadre/api/services/public/pedido.php?action=readDetail`, {
         method: 'GET',
       });
       const data = await response.json();
@@ -60,7 +60,7 @@ const Carrito = ({ navigation }) => {
   // Función para finalizar el pedido
   const finalizarPedido = async () => {
     try {
-      const response = await fetch(`${ip}/Tienda/T.Booksadre/api/services/public/pedido.php?action=finishOrder`, {
+      const response = await fetch(`${ip}/T.Booksadre/api/services/public/pedido.php?action=finishOrder`, {
         method: 'GET',
       });
       const data = await response.json();

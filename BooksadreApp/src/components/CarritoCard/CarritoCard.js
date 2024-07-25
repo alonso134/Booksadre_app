@@ -20,7 +20,7 @@ const CarritoCard = ({item, cargarCategorias,
       try {
         const formData = new FormData();
         formData.append('idDetalle', idDetalle);
-        const response = await fetch(`${ip}/Tienda/T.Booksadre/api/services/public/pedido.php?action=deleteDetail`, {
+        const response = await fetch(`${ip}/T.Booksadre/api/services/public/pedido.php?action=deleteDetail`, {
           method: 'POST',
           body: formData
         });
@@ -53,7 +53,7 @@ const CarritoCard = ({item, cargarCategorias,
               onPress: async () => {
                 const formData = new FormData();
                 formData.append('idDetalle', idDetalle);
-                const response = await fetch(`${ip}/Tienda/T.Booksadre/api/services/public/pedido.php?action=deleteDetail`, {
+                const response = await fetch(`${ip}/T.Booksadre/api/services/public/pedido.php?action=deleteDetail`, {
                   method: 'POST',
                   body: formData
                 });

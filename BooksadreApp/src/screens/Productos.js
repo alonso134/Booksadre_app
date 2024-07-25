@@ -24,7 +24,7 @@ export default function Productos({ navigation }) {
   Ahorita no se ocupa este codigo
   const volverLogin = async () => {
     try {
-      const response = await fetch(`${ip}/Tienda/T.Booksadre/services/public/cliente.php?action=logOut`, {
+      const response = await fetch(`${ip}/T.Booksadre/services/public/cliente.php?action=logOut`, {
         method: 'GET'
       });
 
@@ -65,7 +65,7 @@ export default function Productos({ navigation }) {
       const formData = new FormData();
       formData.append('idCategoria', idCategoriaSelect);
       //utilizar la direccion IP del servidor y no localhost
-      const response = await fetch(`${ip}/Tienda/T.Booksadre/api/services/public/producto.php?action=readProductosCategoria`, {
+      const response = await fetch(`${ip}/T.Booksadre/api/services/public/producto.php?action=readProductosCategoria`, {
         method: 'POST',
         body: formData
       });
@@ -90,7 +90,7 @@ export default function Productos({ navigation }) {
     try {
 
       //utilizar la direccion IP del servidor y no localhost
-      const response = await fetch(`${ip}/Tienda/T.Booksadre/api/services/public/categoria.php?action=readAll`, {
+      const response = await fetch(`${ip}/T.Booksadre/api/services/public/categoria.php?action=readAll`, {
         method: 'GET',
       });
 

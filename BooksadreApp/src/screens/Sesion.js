@@ -14,7 +14,7 @@ export default function Sesion({ navigation }) {
 
   const validarSesion = async () => {
     try {
-      const response = await fetch(`${ip}/Tienda/T.Booksadre/api/services/public/cliente.php?action=getUser`, {
+      const response = await fetch(`${ip}/T.Booksadre/api/services/public/cliente.php?action=getUser`, {
         method: 'GET'
       });
   
@@ -35,7 +35,7 @@ export default function Sesion({ navigation }) {
 
   const cerrarSesion = async () => {
     try {
-      const response = await fetch(`${ip}/Tienda/T.Booksadre/api/services/public/cliente.php?action=logOut`, {
+      const response = await fetch(`${ip}/T.Booksadre/api/services/public/cliente.php?action=logOut`, {
         method: 'GET'
       });
 
@@ -58,7 +58,7 @@ export default function Sesion({ navigation }) {
       formData.append('correo', usuario);
       formData.append('clave', contrasenia);
 
-      const response = await fetch(`${ip}/Tienda/T.Booksadre/api/services/public/cliente.php?action=logIn`, {
+      const response = await fetch(`${ip}/T.Booksadre/api/services/public/cliente.php?action=logIn`, {
         method: 'POST',
         body: formData
       });
