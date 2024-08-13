@@ -10,6 +10,7 @@ import Productos from './src/screens/Productos.js';
 import Carrito from './src/screens/Carrito.js';
 import TabNavigator from './src/tabNavigator/TabNavigator.js';
 
+
 export default function App() {
 
 
