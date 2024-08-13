@@ -132,7 +132,7 @@ const HistorialPedidos = () => {
             <Text style={styles.title}>Historial de Pedidos</Text>
             <TextInput
                 style={styles.searchInput}
-                placeholder="Buscar producto..."
+                placeholder="Buscar pedido..."
                 value={searchQuery}
                 onChangeText={setSearchQuery}
             />
