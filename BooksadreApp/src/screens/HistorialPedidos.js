@@ -7,6 +7,8 @@ const HistorialPedidos = () => {
     const ip = Constantes.IP;
     const [pedidos, setPedidos] = useState([]);
     const [productosComprados, setProductosComprados] = useState([]);
+    const [filteredPedidos, setFilteredPedidos] = useState([]); // Para datos filtrados
+    const [searchQuery, setSearchQuery] = useState(''); // Para la búsqueda
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [calificacion, setCalificacion] = useState(null);
@@ -18,12 +20,24 @@ const HistorialPedidos = () => {
         loadProductosComprados();
     }, []);
 
+    useEffect(() => {
+        if (searchQuery) {
+            const filtered = pedidos.filter(pedido =>
+                pedido.nombre_producto.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+            setFilteredPedidos(filtered);
+        } else {
+            setFilteredPedidos(pedidos);
+        }
+    }, [searchQuery, pedidos]);
+
     const loadPedidos = async () => {
         try {
             const response = await fetch(`${ip}/T.Booksadre/api/services/public/pedido.php?action=getHistory`);
             const result = await response.json();
             if (result.status) {
                 setPedidos(result.dataset);
+                setFilteredPedidos(result.dataset); // Inicializa los datos filtrados
             } else {
                 console.error('Error loading pedidos:', result.error);
             }
@@ -76,7 +90,7 @@ const HistorialPedidos = () => {
                 if (result.status) {
                     alert('Valoración enviada correctamente.');
                     setShowModal(false);
-                    loadPedidos();
+                    loadPedidos(); // Carga nuevamente los pedidos después de enviar la valoración
                 } else {
                     alert(`Error: ${result.error || 'Error desconocido'}`);
                 }
@@ -116,14 +130,20 @@ const HistorialPedidos = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Historial de Pedidos</Text>
+            <TextInput
+                style={styles.searchInput}
+                placeholder="Buscar producto..."
+                value={searchQuery}
+                onChangeText={setSearchQuery}
+            />
             <FlatList
-                data={pedidos}
+                data={filteredPedidos}
                 renderItem={renderPedidoItem}
                 keyExtractor={(item, index) => index.toString()}
                 ListHeaderComponent={renderHeader}
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
             />
-            <Button title="Calificar productos" onPress={openModal}   color="#28a745"  />
+            <Button title="Calificar productos" onPress={openModal} color="#28a745" />
             <Modal visible={showModal} animationType="slide" transparent={true}>
                 <View style={styles.modalOverlay}>
                     <View style={styles.modalContainer}>
@@ -164,7 +184,7 @@ const HistorialPedidos = () => {
                             multiline={true}
                         />
                         <View style={styles.modalButtons}>
-                            <Button title="Guardar" onPress={submitValoracion}   color="#28a745"  />
+                            <Button title="Guardar" onPress={submitValoracion} color="#28a745" />
                             <Button title="Cancelar" onPress={() => setShowModal(false)} color="red" />
                         </View>
                     </View>
@@ -185,6 +205,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 20,
         textAlign: 'center',
+    },
+    searchInput: {
+        height: 40,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        marginBottom: 20,
+        paddingHorizontal: 10,
+        borderRadius: 5,
     },
     tableHeader: {
         flexDirection: 'row',
