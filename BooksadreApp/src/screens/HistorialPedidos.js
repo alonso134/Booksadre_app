@@ -79,7 +79,7 @@ const HistorialPedidos = () => {
         formData.append('comentarioValoracion', comentario);
 
         try {
-            const response = await fetch(`${ip}/T.Booksadre/api/services/admin/valoracion.php?action=createValoracion`, {
+            const response = await fetch(`${ip}/T.Booksadre/api/services/public/pedido.php?action=createValoracion`, {
                 method: 'POST',
                 body: formData,
             });
