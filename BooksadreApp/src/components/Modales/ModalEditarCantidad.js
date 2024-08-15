@@ -3,7 +3,7 @@ import { View, Text, Modal, StyleSheet, TouchableOpacity, TextInput, Alert } fro
 import Buttons from '../Buttons/Button';
 import * as Constantes from '../../utils/constantes';
 
-const ModalEditarCantidad = ({setModalVisible, modalVisible, idDetalle, setCantidadProductoCarrito, cantidadProductoCarrito, getDetalleCarrito}) => {
+const ModalEditarCantidad = ({setModalVisible, modalVisible, idDetalle, idProducto, setCantidadProductoCarrito, cantidadProductoCarrito, getDetalleCarrito}) => {
 
   const ip = Constantes.IP;
 
@@ -16,6 +16,7 @@ const ModalEditarCantidad = ({setModalVisible, modalVisible, idDetalle, setCanti
 
       const formData = new FormData();
       formData.append('idDetalle', idDetalle);
+      formData.append('idProducto', idProducto);
       formData.append('cantidadProducto', cantidadProductoCarrito);
 
       const response = await fetch(`${ip}/T.Booksadre/api/services/public/pedido.php?action=updateDetail`, {
