@@ -133,7 +133,7 @@ export default function SignUp({ navigation }) {
 
             const data = await response.json();
             if (data.status) {
-                Alert.alert('Datos Guardados correctamente');
+                Alert.alert(`${data.message}`);
                 navigation.navigate('Sesion');
             } else {
                 Alert.alert('Error', data.error);

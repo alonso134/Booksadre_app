@@ -83,6 +83,10 @@ export default function Sesion({ navigation }) {
     navigation.navigate('SignUp');
   };
 
+  const irRecu = async () => {
+    navigation.navigate('Recovery');
+  };
+
   useEffect(() => { validarSesion() }, [])
 
   return (
@@ -106,6 +110,7 @@ export default function Sesion({ navigation }) {
         textoBoton='Iniciar Sesión'
         accionBoton={handlerLogin} />
       <TouchableOpacity onPress={irRegistrar}><Text style={styles.textRegistrar}>¿No tienes cuenta? Regístrate aquí</Text></TouchableOpacity>
+      <TouchableOpacity onPress={irRecu}><Text style={styles.textRegistrar}>¿Olvidastes tu contraseña?</Text></TouchableOpacity>
     </View>
   );
 }
